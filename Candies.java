@@ -1,19 +1,15 @@
-package Candies;
-
 import java.util.*;
 
 public class Solution
 {
     static List<Student> studentList = new ArrayList<Student>();
-    static List<Student> studentList1 = new ArrayList<Student>();
 
     public static void main (String[] args) throws Exception
     {
-
         Scanner sc = new Scanner(System.in);
         int totalStudents = Integer.parseInt(sc.nextLine());
 
-        while(sc.hasNextLine()) {
+        for(int i=0; i<totalStudents; i++){
             addStudentToList(Integer.parseInt(sc.nextLine()));
         }
 
@@ -27,32 +23,25 @@ public class Solution
         int totalCandies = 0;
         for (Student student : studentList)
         {
+            Student temp;
+            
             if (student.left_neighbour != null && student.right_neighbour != null)
             {
-                if(student.rank > student.left_neighbour.rank || student.rank > student.right_neighbour.rank)
-                {
-                    int neighbourHighestCandies = student.left_neighbour.candies > student.right_neighbour.candies ? student.left_neighbour.candies : student.right_neighbour.candies;
-                    student.candies = neighbourHighestCandies + 1;
-                }
+                if(student.rank > student.left_neighbour.rank && student.rank > student.right_neighbour.rank)
+                    temp = student.left_neighbour.candies > student.right_neighbour.candies ? student.left_neighbour : student.right_neighbour; 
                 else
-                {
-                    student.candies = 1;
-                }
+                    temp = student.left_neighbour.rank < student.right_neighbour.rank ? student.left_neighbour : student.right_neighbour; 
             }
-            else if (student.left_neighbour == null && student.rank > student.right_neighbour.rank)
-                student.candies = student.right_neighbour.candies + 1;
-            else if (student.right_neighbour == null && student.rank > student.left_neighbour.rank)
-                student.candies = student.left_neighbour.candies + 1;
             else
             {
-                student.candies = 1;
+                temp = student.left_neighbour == null ? student.right_neighbour : student.left_neighbour; 
             }
-
+        
+            student.candies = student.rank <= temp.rank ? 1 : temp.candies + 1;
+            
             totalCandies += student.candies;
         }
-
         System.out.println(totalCandies);
-
     }
 
     private static void addStudentToList(int rank)
@@ -68,9 +57,7 @@ public class Solution
             studentList.get(listSize - 1).right_neighbour = student;
         }
         studentList.add(student);
-        studentList1.add(student);
     }
-
 
     public static class Student
     {
