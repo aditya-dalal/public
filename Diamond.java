@@ -2,60 +2,41 @@ package Test;
 
 import java.util.Scanner;
 
-public class Solution
+public class DiamondNew
 {
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
-        int value = Integer.parseInt(scanner.nextLine());
-
-        diamond(value);
-
+        diamond(Integer.parseInt(scanner.nextLine()));
     }
 
-    static void diamond(int h)
+    private static void diamond(int height)
     {
-        String[][] matrix = new String[h][h];
-        for(int i = 0; i < h; i++)
+        int midLow = 0, midHigh = 0;
+        for(int i = 0; i < height; i++)
         {
-            for(int j= 0; j < h ; j++)
+            if(i <= height/2)
             {
-                matrix[i][j] = "*";
+                midLow = height/2 - i-1;
+                midHigh = height/2 + i+1;
             }
-        }
-
-        for(int i = 0; i < h/2; i++)
-        {
-            int midLow = h/2 - i-1;
-            int midHigh = h/2 + i+1;
-            for(; midLow >= 0; midLow--, midHigh++)
+            else
             {
-                matrix[i][midLow] = " ";
-                matrix[i][midHigh] = "";
+                midLow ++;
+                midHigh --;
             }
-
-        }
-
-        for(int i = h-1, j = 0; i > h/2; i--, j++)
-        {
-            int midLow = h/2 - j-1;
-            int midHigh = h/2 + j+1;
-            for(; (midLow >= 0); midLow--, midHigh++)
+            for(int j = 0; j < height; j++)
             {
-                matrix[i][midLow] = " ";
-                matrix[i][midHigh] = "";
-            }
-
-        }
-
-        for(int i =0; i<h; i++)
-        {
-            for(int j=0; j < h ; j++)
-            {
-                System.out.print(matrix[i][j]);
+                if(j <= midLow)
+                    System.out.print(" ");
+                else if(j >= midHigh)
+                    System.out.print("");
+                else
+                    System.out.print("*");
             }
             System.out.println("");
         }
+
     }
 }
 
