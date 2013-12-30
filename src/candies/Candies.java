@@ -1,6 +1,8 @@
+package candies;
+
 import java.util.*;
 
-public class Solution
+public class Candies
 {
     static List<Student> studentList = new ArrayList<Student>();
 

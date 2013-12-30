@@ -1,8 +1,8 @@
-package Test;
+package diamond;
 
 import java.util.Scanner;
 
-public class DiamondNew
+public class Diamond
 {
     public static void main(String[] args)
     {

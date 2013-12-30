@@ -1,4 +1,4 @@
-package Test;
+package primeNumbers;
 
 import java.util.Scanner;
 
