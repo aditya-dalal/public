@@ -7,8 +7,8 @@ public class ConcatenateIntegers
         int a = 1234;
         int b = 567890123;
 
-        int lengthA = String.valueOf(a).length();
-        int lengthB = String.valueOf(b).length();
+        int lengthA = intLength(a);
+        int lengthB = intLength(b);
         int totalLength = lengthA + lengthB;
         int remainingDigits = 10-lengthA;
 
@@ -22,5 +22,18 @@ public class ConcatenateIntegers
             System.out.println(a * (int) Math.pow(10, lengthB) + b);
         }
 
+    }
+
+    private static int intLength(int value)
+    {
+        int[] arr = {9, 99, 999, 9999, 99999, 999999, 9999999, 99999999, 999999999, Integer.MAX_VALUE};
+        int length = 1;
+
+        for(int temp : arr)
+        {
+            if(value > temp)
+                length += 1;
+        }
+        return length;
     }
 }
