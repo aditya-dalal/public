@@ -4,7 +4,7 @@ public class IntLength
 {
     public static void main(String[] args)
     {
-        int a = 100;
+        int a = 10000;
         System.out.println(intLength(a));
     }
 
@@ -17,6 +17,8 @@ public class IntLength
         {
             if(value > temp)
                 length += 1;
+            else
+                break;
         }
         return length;
     }

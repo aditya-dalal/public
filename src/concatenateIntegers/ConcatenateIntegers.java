@@ -33,6 +33,8 @@ public class ConcatenateIntegers
         {
             if(value > temp)
                 length += 1;
+            else
+                break;
         }
         return length;
     }
