@@ -10,7 +10,7 @@ public class Blink
                 System.out.print("\u0008.");
             else
                 System.out.print("\u0008*");
-            Thread.sleep(1000);
+            Thread.sleep(500);
         }
     }
 }
