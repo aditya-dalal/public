@@ -12,11 +12,11 @@ public class TileArrangement
         System.out.println(fibonacciRecursion(boardLength + 1));
     }
 
-    private static int getFibonacciNumberFor(int index)
+    private static long getFibonacciNumberFor(int index)
     {
-        int previous = 0;
-        int result = 1;
-        int temp = 0;
+        long previous = 0;
+        long result = 1;
+        long temp = 0;
         if(index <= 1)
             return 0;
         else
@@ -31,7 +31,7 @@ public class TileArrangement
         }
     }
 
-    private static int fibonacciRecursion(int index)
+    private static long fibonacciRecursion(int index)
     {
         if(index == 0)
             return 0;
