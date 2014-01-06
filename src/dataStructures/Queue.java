@@ -3,32 +3,71 @@ package dataStructures;
 public class Queue
 {
     private Integer[] queue;
-    private int head = 0;
-    private int tail = 0;
+    private int head;
+    private int tail;
     private int size;
-    private int iteration = 0;
+    private int count;
 
     public Queue(int size)
     {
+        initialize(size);
+    }
+
+    private synchronized void initialize(int size)
+    {
         queue = new Integer[size];
         this.size = size;
+        head = 0;
+        tail = -1;
+        count = 0;
     }
 
     public synchronized void enqueue(int value)
     {
+        if(tail == -1)
+            tail++;
+        else if(tail + 1 > size - 1)
+        {
+            if(head == 0)
+            {
+                System.out.println("Queue is full");
+                return;
+            }
+            else
+                tail = 0;
+        }
+        else if(tail + 1 == head)
+        {
+            System.out.println("Queue is full");
+            return;
+        }
+        else
+            tail++;
+
         queue[tail] = value;
-        incrementTail();
+        count++;
     }
 
-    public synchronized int dequeue()
+    public synchronized void dequeue()
     {
-        int value = queue[head];
-        queue[head] = null;
-        if(head + 1 > size - 1)
-            head = 0;
-        else
-            head++;
-        return value;
+        Integer value = null;
+        if(count != 0)
+        {
+            value = queue[head];
+            queue[head] = null;
+            if(head + 1 > size - 1)
+            {
+                if(tail == 0)
+                    System.out.println("Queue is empty");
+                else
+                    head = 0;
+            }
+            else if(head + 1 > tail)
+                System.out.println("Queue is empty");
+            else
+                head++;
+            count--;
+        }
     }
 
     public void printElements()
@@ -45,35 +84,4 @@ public class Queue
                 temp++;
         }
     }
-
-    private void incrementTail()
-    {
-        if(iteration == 0)
-        {
-            if(tail + 1 > size - 1)
-                tail = 0;
-            else
-                tail++;
-            iteration++;
-        }
-        else
-        {
-            if(tail == head)
-            {
-                if(tail + 1 > size - 1)
-                    tail = 0;
-                else
-                    tail++;
-                head = tail;
-            }
-            else
-            {
-                if(tail + 1 > size - 1)
-                    tail = 0;
-                else
-                    tail++;
-            }
-        }
-    }
-
 }
