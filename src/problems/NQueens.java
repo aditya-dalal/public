@@ -4,7 +4,7 @@ import java.util.*;
 
 public class NQueens
 {
-    static int size = 12;
+    static int size = 8;
     static boolean [][] board = new boolean[size][size];
     static int count = 0;
     static Stack<Integer> lastRow = new Stack<Integer>();
@@ -18,15 +18,15 @@ public class NQueens
         System.out.println("Iterations: " + iterations);
     }
 
-    public static boolean placeQueen(int row, int column)
+    public static void placeQueen(int row, int column)
     {
         iterations++;
         if(count == size)
-            return true;
-        else if(column > size-1)
+            return;
+        else if(count != size && column > size-1)
         {
             if(lastRow.empty())
-                return false;
+                return;
             board[lastRow.peek()][lastColumn.peek()] = false;
             count--;
             placeQueen(lastRow.pop(), lastColumn.pop() + 1);
@@ -46,17 +46,12 @@ public class NQueens
                 placeQueen(row, column+1);
             }
         }
-        return false;
     }
 
     private static boolean checkValidPosition(int row, int column)
     {
         for(int i = row; i >= 0; i--)
             if(board[i][column] == true)
-                return false;
-
-        for(int i = column; i >= 0; i--)
-            if(board[row][i] == true)
                 return false;
 
         for (int i = row-1, j = column-1; (i >= 0 && j >= 0) ; i--, j--)
