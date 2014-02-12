@@ -7,7 +7,9 @@ public class Diamond
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
-        diamond(Integer.parseInt(scanner.nextLine()));
+        int height = Integer.parseInt(scanner.nextLine());
+        diamond(height);
+        diamond2(height);
     }
 
     private static void diamond(int height)
@@ -37,6 +39,33 @@ public class Diamond
             System.out.println("");
         }
 
+    }
+
+    private static void diamond2(int height)
+    {
+        int mid = height / 2;
+
+        for(int i = 0; i < height; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                if(i <= mid)
+                {
+                    if(j >= mid - i && j <= mid + i)
+                        System.out.print("*");
+                    else
+                        System.out.print(" ");
+                }
+                else
+                {
+                    if(j >= i - mid && j < height - i + mid)
+                        System.out.print("*");
+                    else
+                        System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
     }
 }
 
