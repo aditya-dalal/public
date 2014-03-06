@@ -1,6 +1,7 @@
 package algorithms;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class QuickSort
 {
@@ -25,9 +26,13 @@ public class QuickSort
 
     private static int partition(Integer[] arr, int min, int max)
     {
+        int pivotIndex = getRandomIndex(min, max);
+        int temp = arr[pivotIndex];
+        arr[pivotIndex] = arr[max];
+        arr[max] = temp;
+
         int value = arr[max];
         int index = min - 1;
-        int temp;
 
         for(int i = min; i < max; i++)
         {
@@ -45,5 +50,10 @@ public class QuickSort
         arr[index] = value;
         arr[max] = temp;
         return index;
+    }
+
+    private static int getRandomIndex(int min, int max)
+    {
+        return new Random().nextInt(max-min+1) + min;
     }
 }
