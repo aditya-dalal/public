@@ -19,7 +19,7 @@ public class PriorityQueueUsingHeap
         heapify(arr);
         int max = arr[0];
         arr[0] = arr[arr.length - 1];
-        maxHeapify(arr, 0, arr.length - 2);
+        maxHeapify(arr, 0, arr.length - 1);
         return max;
     }
 
