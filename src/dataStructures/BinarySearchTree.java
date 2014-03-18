@@ -1,5 +1,8 @@
 package dataStructures;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinarySearchTree
 {
     public static Integer[] arr = {10,17,27,3,16,13,1,5,7,12,4,8,9,0,4};
@@ -29,6 +32,10 @@ public class BinarySearchTree
         System.out.print("PostOrder: ");
         postOrder(tree.root);
         System.out.println();
+
+        System.out.println("All paths from root to leaf nodes.");
+        List<Node> paths = new ArrayList<Node>();
+        pathFromRootToLeaves(tree.root, paths);
 
         System.out.println("Max: " + maximum(tree.root).value);
         System.out.println("Min: " + minimum(tree.root).value);
@@ -63,6 +70,22 @@ public class BinarySearchTree
 
         delete(tree, n1);
         inOrder(tree.root);
+    }
+
+    private static void pathFromRootToLeaves(Node root, List<Node> paths)
+    {
+        if(root == null)
+            return;
+        paths.add(root);
+        if(root.leftChild == null && root.rightChild == null)
+        {
+            for(Node node : paths)
+                System.out.print(node.value + ", ");
+            System.out.println();
+        }
+        pathFromRootToLeaves(root.leftChild, paths);
+        pathFromRootToLeaves(root.rightChild, paths);
+        paths.remove(root);
     }
 
     private static void delete(Tree tree, Node node)
