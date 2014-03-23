@@ -41,7 +41,10 @@ public class LongestCommonSubsequence
             }
         }
 
-        subsequence(str1, direction, memo.length-1, memo[0].length-1);
+        System.out.println("LCS lenght: " + memo[str1.length()][str2.length()]);
+        subsequence(str1, direction, memo.length - 1, memo[0].length - 1);
+        System.out.println();
+        subsequenceWithoutUsingDirectionMatrix(str1, memo, memo.length - 1, memo[0].length - 1);
     }
 
     private static void subsequence(String str, char[][] direction, int row, int column)
@@ -49,13 +52,31 @@ public class LongestCommonSubsequence
         if(row == 0 || column == 0)
             return;
         if(direction[row][column] == 'u')
-            subsequence(str,direction,row-1,column);
+            subsequence(str, direction, row - 1, column);
         else if(direction[row][column] == 'l')
-            subsequence(str, direction, row,column-1);
+            subsequence(str, direction, row, column - 1);
         else
         {
-            subsequence(str,direction,row-1,column-1);
-            System.out.println(str.charAt(row-1));
+            subsequence(str, direction, row - 1, column - 1);
+            System.out.print(str.charAt(row - 1));
+        }
+    }
+
+    private static void subsequenceWithoutUsingDirectionMatrix(String str, int[][] memo, int row, int column)
+    {
+        if(row == 0 || column == 0)
+            return;
+        if(memo[row-1][column] == memo[row][column] || memo[row][column-1] == memo[row][column])
+        {
+            if(memo[row-1][column] == memo[row][column])
+                subsequenceWithoutUsingDirectionMatrix(str, memo, row - 1, column);
+            else
+                subsequenceWithoutUsingDirectionMatrix(str, memo, row, column - 1);
+        }
+        else
+        {
+            subsequenceWithoutUsingDirectionMatrix(str, memo, row - 1, column - 1);
+            System.out.print(str.charAt(row - 1));
         }
     }
 
