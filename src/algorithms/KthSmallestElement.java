@@ -37,7 +37,7 @@ public class KthSmallestElement
         int pivot = arr[max];
         int index = min-1;
 
-        for(int i = min; i < arr.length-1; i++)
+        for(int i = min; i < max; i++)
         {
             if(arr[i] < pivot)
             {
