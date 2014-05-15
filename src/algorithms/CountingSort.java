@@ -12,6 +12,8 @@ public class CountingSort
 
         countingSort(arr, result);
         System.out.println(Arrays.asList(result));
+        countingSort(arr);
+        System.out.println(Arrays.asList(arr));
     }
 
     private static void countingSort(Integer[] arr, Integer[] result)
@@ -41,6 +43,29 @@ public class CountingSort
         {
             result[count[arr[i]] - 1] = arr[i];
             count[arr[i]] = count[arr[i]] - 1;
+        }
+    }
+
+    private static void countingSort(Integer[] arr)
+    {
+        int max = 0;
+        for (int val : arr)
+            if(val > max)
+                max=val;
+        int[] count = new int[max+1];
+
+        for(int val : arr)
+            count[val] = count[val] + 1;
+
+        int countIndex = 0, i = 0;
+        while (i < arr.length)
+        {
+            while (count[countIndex] != 0)
+            {
+                arr[i++] = countIndex;
+                count[countIndex] = count[countIndex] - 1;
+            }
+            countIndex++;
         }
     }
 }
