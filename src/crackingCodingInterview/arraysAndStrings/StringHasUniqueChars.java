@@ -7,7 +7,7 @@ public class StringHasUniqueChars
 		String str = "abcdef";
 		System.out.println(bruteForce(str));
 		System.out.println(booleanArray(str));
-        System.out.println(usingBitManipulation(str));  // Works only for lower case alphabets
+        System.out.println(usingBitManipulation(str));  // Works only for alphabets
     }
 
 	public static boolean bruteForce(String str)
@@ -41,13 +41,14 @@ public class StringHasUniqueChars
 
     public static boolean usingBitManipulation(String str)
     {
-        int checker = 0;
+        long checker = 0;
         for(int i = 0; i < str.length(); i++)
         {
-            int val = str.charAt(i) - 'a';
-            if((checker & (1 << val)) > 0)
+            int val = str.charAt(i) - 'A';
+            long temp = (long)1 << val;
+            if((checker & temp) > 0)
                 return false;
-            checker |= 1 << val;
+            checker |= temp;
         }
         return true;
     }
