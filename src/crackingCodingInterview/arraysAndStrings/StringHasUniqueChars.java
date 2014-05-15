@@ -1,8 +1,6 @@
 package crackingCodingInterview.arraysAndStrings;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class StringHasUniqueChars
 {
@@ -13,6 +11,7 @@ public class StringHasUniqueChars
         System.out.println(booleanArray(str));
         System.out.println(usingBitManipulation(str));  // Works only for alphabets
         System.out.println(usingSort(str));
+        System.out.println(usingMap(str));
     }
 
     public static boolean bruteForce(String str)
@@ -71,4 +70,17 @@ public class StringHasUniqueChars
         }
         return true;
     }
+
+    public static boolean usingMap(String str)
+    {
+        Map<Character, Boolean> charCountMap = new HashMap<Character, Boolean>();
+        for(char val : str.toCharArray())
+        {
+            if(charCountMap.get(val) != null)
+                return false;
+            charCountMap.put(val, true);
+        }
+        return true;
+    }
+
 }
