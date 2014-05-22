@@ -7,7 +7,7 @@ public class TowerOfHanoi
         String source = "A";
         String destination = "B";
         String temp = "C";
-        towerOfHanoi(4, source, temp, destination);
+        towerOfHanoi(3, source, temp, destination);
     }
 
     private static void towerOfHanoi(int i, String source, String temp, String destination)
