@@ -20,7 +20,7 @@ public class KthSmallestElement
             int mid = partition(arr, min, max);
             if(k == mid)
                 System.out.println(arr[mid]);
-            else if(k < mid)
+            else if(k-1 < mid)
                 quickSelect(arr, min, mid - 1, k);
             else
                 quickSelect(arr, mid + 1, max, k);

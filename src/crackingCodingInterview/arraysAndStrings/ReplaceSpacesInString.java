@@ -13,7 +13,7 @@ public class ReplaceSpacesInString
 
     public static String replaceSpacesUsingInbuiltFunction(String str, String replace)
     {
-        return str.replaceAll("\\s", replace);
+        return str.replace(" ", replace);
     }
 
     public static String replaceSpacesWith(String str, String replace)

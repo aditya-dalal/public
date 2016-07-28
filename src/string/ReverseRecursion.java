@@ -12,6 +12,7 @@ public class ReverseRecursion
         Scanner scanner = new Scanner(System.in);
         String value = scanner.nextLine();
         System.out.println(reverse(value));
+        System.out.println(reverse1(value));
     }
 
 //    static String reverse(String str)
@@ -34,6 +35,12 @@ public class ReverseRecursion
         {
             return str.charAt(str.length() - 1) + reverse(str.substring(0, str.length() - 1));
         }
+    }
+
+    static String reverse1(String str) {
+        if(str.length() == 1)
+            return str;
+        return reverse(str.substring(1)) + str.charAt(0);
     }
 }
 

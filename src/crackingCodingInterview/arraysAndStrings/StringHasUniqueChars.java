@@ -35,7 +35,7 @@ public class StringHasUniqueChars
         boolean[] boolArr = new boolean[256];
         for(char val : str.toCharArray())
         {
-            if(boolArr[(int) val] == true)
+            if(boolArr[(int) val])
                 return false;
             else
                 boolArr[(int) val] = true;
@@ -48,7 +48,7 @@ public class StringHasUniqueChars
         long checker = 0;
         for(int i = 0; i < str.length(); i++)
         {
-            int val = str.charAt(i) - 'A';
+            int val = str.charAt(i) - 'a';
             long temp = (long)1 << val;
             if((checker & temp) > 0)
                 return false;

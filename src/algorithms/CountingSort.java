@@ -29,9 +29,9 @@ public class CountingSort
 
         int[] count = new int[largest];
 
-        for(int i = 0; i < arr.length; i++)
+        for(int i : arr)
         {
-            count[arr[i]] = count[arr[i]] + 1;
+            count[i]++;
         }
 
         for(int i = 1; i < count.length; i++)
@@ -66,6 +66,18 @@ public class CountingSort
                 count[countIndex] = count[countIndex] - 1;
             }
             countIndex++;
+        }
+    }
+
+    public static void countingSort1(Integer[] arr){ // not in O(n)
+        int[] b = new int[arr.length];
+
+        for(int i : arr)
+            b[i]++;
+        for(int i = 0, val = 0; i < b.length; i++){
+            for(int j = 0; j < b[i]; j++){
+                arr[val++] = i;
+            }
         }
     }
 }

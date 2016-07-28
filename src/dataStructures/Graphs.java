@@ -1,6 +1,7 @@
 package dataStructures;
 
 import java.util.*;
+import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -149,7 +150,55 @@ public class Graphs
             current.color = Color.BLACK;
         }
     }
+
+    public static void dfsRec(Node root){
+        root.visited = true;
+        System.out.println(root.value);
+        for (Node temp: root.nodes)
+            if(!temp.visited)
+                dfsRec(temp);
+    }
+
+    public static void bfs(Node root){
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            Node n = queue.poll();
+            System.out.println(n.value);
+            for(Node temp: n.nodes)
+                if(!temp.visited)
+                    queue.add(temp);
+            n.visited = true;
+        }
+    }
+
+    public static void dfs(Node root){
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.empty()){
+            Node n = stack.pop();
+            System.out.println(n.value);
+            for(Node temp : n.nodes){
+                if(!temp.visited)
+                    stack.push(temp);
+            }
+            n.visited = true;
+        }
+    }
+
+    static class Node{
+        public char value;
+        public List<Node> nodes;
+        public boolean visited;
+
+        public Node(char value){
+            this.value = value;
+            nodes = new ArrayList<>();
+        }
+    }
 }
+
+
 
 class Graph
 {

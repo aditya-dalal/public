@@ -65,6 +65,8 @@ public class BinarySearchTree
 
         System.out.println("LCA BST approach2: " + lowestCommonAncestorBinarySearchTree(tree.root, n1, n2).value);
 
+        System.out.println("LCA Binary tree correct approach: " + commonAncestor(tree.root, n1, n2).value);
+
         node.value = 3;
         n1 = treeSearch(tree.root, node);
 
@@ -86,6 +88,26 @@ public class BinarySearchTree
         pathFromRootToLeaves(root.leftChild, paths);
         pathFromRootToLeaves(root.rightChild, paths);
         paths.remove(root);
+    }
+
+    public static List<Node> getPath(Node root, Node node){
+        List<Node> path = new ArrayList<>();
+        List<Node> route = new ArrayList<>();
+        path(root, node, path, route);
+        return route;
+    }
+
+    public static void path(Node root, Node node, List<Node> path, List<Node> route){
+        if(root == null)
+            return;
+        path.add(root);
+        if(root.value == node.value) {
+            for(Node node1 : path)
+                route.add(node1);
+        }
+        path(root.leftChild, node, path, route);
+        path(root.rightChild, node, path, route);
+        path.remove(path.size()-1);
     }
 
     private static void delete(Tree tree, Node node)
@@ -121,7 +143,17 @@ public class BinarySearchTree
             node.value = current.value;
     }
 
-    private static Node lowestCommonAncestorBinaryTree(Node root, Node n1, Node n2)
+    public static Node commonAncestor(Node root, Node n1, Node n2){
+
+        List<Node> path1 = getPath(root, n1);
+        List<Node> path2 = getPath(root, n2);
+        int i =0;
+        while (path1.get(i) == path2.get(i))
+            i++;
+        return path1.get(i-1);
+    }
+
+    private static Node lowestCommonAncestorBinaryTree(Node root, Node n1, Node n2) // incorrect
     {
         if(root == null || n1 == null || n2 == null)
             return null;

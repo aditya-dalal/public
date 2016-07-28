@@ -52,6 +52,22 @@ public class QuickSort
         return index;
     }
 
+    public static int partition1(Integer[] arr, int start, int end){
+        int pivot = arr[end];
+        int i = start, j = end;
+        while(i < j){
+            if(arr[i] > pivot){
+                arr[j] = arr[i];
+                arr[i] = arr[j-1];
+                arr[j-1] = pivot;
+                j--;
+            }
+            else
+                i++;
+        }
+        return j;
+    }
+
     private static int getRandomIndex(int min, int max)
     {
         return new Random().nextInt(max-min+1) + min;

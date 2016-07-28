@@ -8,6 +8,7 @@ public class RemoveDuplicateChars
         System.out.println(removeDuplicate(str));
         System.out.println(removeDuplicate1(str));
         System.out.println(removeDuplicate2(str));
+        System.out.println(removeDupes(str));
     }
 
     public static String removeDuplicate(String str)
@@ -59,13 +60,25 @@ public class RemoveDuplicateChars
         StringBuilder result = new StringBuilder();
         for(char val : str.toCharArray())
         {
-            if(ascii[val] != true)
+            if(!ascii[val])
             {
                 result.append(val);
                 ascii[val] = true;
             }
         }
         return result.toString();
+    }
+
+    public static String removeDupes(String str){
+        long checker = 0;
+        char[] strArr = str.toCharArray();
+        for(int i = 0; i < strArr.length; i++){
+            int temp = 1 << (strArr[i] - 'a');
+            if((checker & temp) > 0)
+                strArr[i] = 0;
+            checker |= temp;
+        }
+        return new String(strArr);
     }
 
 }
