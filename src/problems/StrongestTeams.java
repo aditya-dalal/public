@@ -13,9 +13,7 @@ public class StrongestTeams {
         int[] a = {0, 1, 2};
         int[] b = {3, 4, 5};
         int[] c = {6, 7, 8, 9};
-        int x = 2, y = 2, z = 2, k = 4;
-
-        long start = System.currentTimeMillis();
+        int x = 1, y = 1, z = 1, k = 3;
 
         validateInput(a.length, b.length, c.length, x, y, z, k, s.length);
 
@@ -25,15 +23,12 @@ public class StrongestTeams {
         Map<List<List<Integer>>, Integer> resultMap = new HashMap<>();
 
         List<List<Integer>> teamCombinations = getTeamCombinations(a, b, c, x, y, z, k);
-        System.out.println(teamCombinations);
 
         for(List<Integer> teamCombination: teamCombinations) {
 
             List<List<List<Integer>>> teams = getTeams(batsmanCombinationsMap, bowlerCombinationsMap, keeperCombinationsMap, teamCombination);
-            System.out.println(teams.size());
 
             List<List<List<Integer>>> validGroups = getGroups(teams, k);
-            System.out.println(validGroups.size());
 
             Map<List<Integer>, Integer> teamStrengthMap = getTeamStrengthMap(s, validGroups);
 
@@ -48,7 +43,6 @@ public class StrongestTeams {
         else {
             printResult(s, getResult(s, resultMap));
         }
-        System.out.println(System.currentTimeMillis() - start);
 
     }
 
