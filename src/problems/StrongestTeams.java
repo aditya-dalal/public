@@ -13,7 +13,9 @@ public class StrongestTeams {
         int[] a = {0, 1, 2};
         int[] b = {3, 4, 5};
         int[] c = {6, 7, 8, 9};
-        int x = 1, y = 1, z = 1, k = 3;
+        int x = 2, y = 2, z = 2, k = 4;
+
+        long start = System.currentTimeMillis();
 
         validateInput(a.length, b.length, c.length, x, y, z, k, s.length);
 
@@ -23,14 +25,15 @@ public class StrongestTeams {
         Map<List<List<Integer>>, Integer> resultMap = new HashMap<>();
 
         List<List<Integer>> teamCombinations = getTeamCombinations(a, b, c, x, y, z, k);
+        System.out.println(teamCombinations);
 
         for(List<Integer> teamCombination: teamCombinations) {
 
             List<List<List<Integer>>> teams = getTeams(batsmanCombinationsMap, bowlerCombinationsMap, keeperCombinationsMap, teamCombination);
+            System.out.println(teams.size());
 
-            List<List<List<List<Integer>>>> groups = getGroups(teams);
-
-            List<List<List<Integer>>> validGroups = getValidGroups(k, groups);
+            List<List<List<Integer>>> validGroups = getGroups(teams, k);
+            System.out.println(validGroups.size());
 
             Map<List<Integer>, Integer> teamStrengthMap = getTeamStrengthMap(s, validGroups);
 
@@ -45,6 +48,7 @@ public class StrongestTeams {
         else {
             printResult(s, getResult(s, resultMap));
         }
+        System.out.println(System.currentTimeMillis() - start);
 
     }
 
@@ -124,43 +128,38 @@ public class StrongestTeams {
         return teamStrength;
     }
 
-    private static List<List<List<Integer>>> getValidGroups(int k, List<List<List<List<Integer>>>> groups) {
-        List<List<List<Integer>>> validGroups = new ArrayList<>();
-        for (List<List<List<Integer>>> group : groups) {
-            List<List<Integer>> team1 = group.get(0);
-            List<List<Integer>> team2 = group.get(1);
-            List<Integer> newTeam1 = new ArrayList<>();
-            List<Integer> newTeam2 = new ArrayList<>();
-            for (int i = 0; i < team1.size(); i++) {
-                if (team1.get(i).size() == 1) {
-                    newTeam1.add(team1.get(i).get(0));
-                    newTeam2.add(team2.get(i).get(0));
-                } else if (areUniquePlayers(team1.get(i), team2.get(i))) {
-                    for (int j = 0; j < team1.get(i).size(); j++) {
-                        newTeam1.add(team1.get(i).get(j));
-                        newTeam2.add(team2.get(i).get(j));
-                    }
+    private static List<List<Integer>> getValidGroup(List<List<Integer>> team1, List<List<Integer>> team2, int k){
+        List<Integer> newTeam1 = new ArrayList<>();
+        List<Integer> newTeam2 = new ArrayList<>();
+        for (int i = 0; i < team1.size(); i++) {
+            if (team1.get(i).size() == 1) {
+                newTeam1.add(team1.get(i).get(0));
+                newTeam2.add(team2.get(i).get(0));
+            } else if (areUniquePlayers(team1.get(i), team2.get(i))) {
+                for (int j = 0; j < team1.get(i).size(); j++) {
+                    newTeam1.add(team1.get(i).get(j));
+                    newTeam2.add(team2.get(i).get(j));
                 }
             }
-            if (newTeam1.size() == k) {
-                List<List<Integer>> validGroup = new ArrayList<>();
-                validGroup.add(newTeam1);
-                validGroup.add(newTeam2);
-                validGroups.add(validGroup);
-            }
         }
-        return validGroups;
+        List<List<Integer>> group = null;
+        if (newTeam1.size() == k) {
+            group = new ArrayList<>();
+            group.add(newTeam1);
+            group.add(newTeam2);
+        }
+        return group;
     }
 
-    private static List<List<List<List<Integer>>>> getGroups(List<List<List<Integer>>> teams) {
-        List<List<List<List<Integer>>>> groups = new ArrayList<>();
+    private static List<List<List<Integer>>> getGroups(List<List<List<Integer>>> teams, int k) {
+        List<List<List<Integer>>> groups = new ArrayList<>();
         for (int i = 0; i < teams.size(); i++) {
             for (int j = i + 1; j < teams.size(); j++) {
                 if (areTeamsWithUniqueGroups(teams.get(i), teams.get(j))) {
-                    List<List<List<Integer>>> temp = new ArrayList<>();
-                    temp.add(teams.get(i));
-                    temp.add(teams.get(j));
-                    groups.add(temp);
+                    List<List<Integer>> group = getValidGroup(teams.get(i), teams.get(j), k);
+                    if(group != null) {
+                        groups.add(group);
+                    }
                 }
             }
         }
