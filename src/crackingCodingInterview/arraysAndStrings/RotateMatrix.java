@@ -4,11 +4,15 @@ public class RotateMatrix
 {
     public static void main(String[] args)
     {
-        int[][] image = {{0,1,1,1,1},
-                {0,0,1,1,0},
-                {0,0,1,0,1},
-                {0,1,0,0,0},
-                {0,1,0,1,1}};
+        int[][] image = {
+                {10,11,12,13,14,15,16},
+                {20,21,22,23,24,25,26},
+                {30,31,32,33,34,35,36},
+                {40,41,42,43,44,45,46},
+                {50,51,52,53,54,55,56},
+                {60,61,62,63,64,65,66},
+                {70,71,72,73,74,75,76}
+                };
         printImage(image);
         System.out.println();
         rotateImageBy90Degrees(image);
@@ -30,6 +34,21 @@ public class RotateMatrix
                 image[last][last - offset] = image[layer + offset][last];
                 image[layer + offset][last] = top;
             }
+        }
+    }
+
+    public static void rotate1(int[][] image) {
+        int layer = 0, size = image.length;
+        for(;layer < size/2; layer++) {
+            int len = size-1-layer;
+            for (int i = 0; i < len-layer; i++) {
+                int temp = image[layer][layer + i];
+                image[layer][layer + i] = image[len - i][layer];
+                image[len - i][layer] = image[len][len - i];
+                image[len][len - i] = image[layer + i][len];
+                image[layer + i][len] = temp;
+            }
+            printImage(image);
         }
     }
 

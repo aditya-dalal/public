@@ -1,6 +1,5 @@
 package temp;
 
-import org.htmlcleaner.XPatherException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -15,7 +14,7 @@ import java.util.*;
 
 public class Temp {
 
-    public static void main(String[] args) throws IOException, XPatherException, ParserConfigurationException, XPathExpressionException {
+    public static void main(String[] args) throws IOException, ParserConfigurationException, XPathExpressionException {
 //        Character[] letters = {'a', 'b', 'c', 'a'};
 //        List<Character> charList = new ArrayList<Character>(Arrays.asList(letters));
 //
@@ -98,6 +97,7 @@ public class Temp {
 //        }
 //
 //        System.out.println(uniq);
+        System.out.println(Long.MAX_VALUE);
         int num = 6;
         System.out.println(toBinary(num));
         System.out.println(Integer.toBinaryString(num));

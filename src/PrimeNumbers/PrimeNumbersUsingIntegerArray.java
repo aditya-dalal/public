@@ -12,7 +12,7 @@ public class PrimeNumbersUsingIntegerArray
         numberList = new int[limit];
 
         long startTime = System.nanoTime();
-        System.out.println(findPrimes(limit));
+        System.out.println("count: " + findPrimes(limit));
         long totalTime = (System.nanoTime() - startTime) / 1000000;
         System.out.println("Total time(ms): " + totalTime);
     }
@@ -44,9 +44,12 @@ public class PrimeNumbersUsingIntegerArray
         int count = 0;
         for(Integer value : numberList)
         {
-            if(value != 0)
+            if(value != 0) {
                 count++;
+                System.out.print(value + " ");
+            }
         }
+        System.out.println();
         return count;
     }
 }

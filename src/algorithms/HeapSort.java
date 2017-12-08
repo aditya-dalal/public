@@ -6,7 +6,7 @@ public class HeapSort
 {
     public static void main(String[] args)
     {
-        Integer arr[] = {17,27,3,16,13,10,1,5,7,12,4,8,9,0};
+        Integer arr[] = {3,5,1,2,12,8,6,11,4,9,7,10};
 
         heapify(arr);
         System.out.println(Arrays.asList(arr));
@@ -35,8 +35,8 @@ public class HeapSort
 
     public static void maxHeapify(Integer[] arr, int index, int length)
     {
-        int leftIndex = index * 2;
-        int rightIndex = index * 2 + 1;
+        int leftIndex = index * 2 + 1;
+        int rightIndex = index * 2 + 2;
         int larger = index;
 
         if(leftIndex <= length && arr[leftIndex] > arr[larger])

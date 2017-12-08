@@ -31,7 +31,7 @@ public class GoodNodes
 
         for (int i = 0; i < nodeCount; i++)
         {
-            System.out.println("Node: "+ nodeList.get(i).value + " -> " + nodeList.get(i).next.value);
+            System.out.println("TrieNode: "+ nodeList.get(i).value + " -> " + nodeList.get(i).next.value);
         }
 
         for(int i = 1; i < nodeCount; i++)
@@ -44,7 +44,7 @@ public class GoodNodes
         System.out.println("\nAfter changing");
         for (int i = 0; i < nodeCount; i++)
         {
-            System.out.println("Node: "+ nodeList.get(i).value + " -> " + nodeList.get(i).next.value);
+            System.out.println("TrieNode: "+ nodeList.get(i).value + " -> " + nodeList.get(i).next.value);
         }
 
     }

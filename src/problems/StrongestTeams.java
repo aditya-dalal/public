@@ -13,16 +13,18 @@ public class StrongestTeams {
         int[] a = {0, 1, 2};
         int[] b = {3, 4, 5};
         int[] c = {6, 7, 8, 9};
-        int x = 1, y = 1, z = 1, k = 3;
+        int x = 2, y = 2, z = 2, k = 4;
 
         validateInput(a.length, b.length, c.length, x, y, z, k, s.length);
 
         Map<Integer, List<List<Integer>>> batsmanCombinationsMap = getPlayerCombinations(a, x);
+        System.out.println(batsmanCombinationsMap);
         Map<Integer, List<List<Integer>>> bowlerCombinationsMap = getPlayerCombinations(b, y);
         Map<Integer, List<List<Integer>>> keeperCombinationsMap = getPlayerCombinations(c, z);
         Map<List<List<Integer>>, Integer> resultMap = new HashMap<>();
 
         List<List<Integer>> teamCombinations = getTeamCombinations(a, b, c, x, y, z, k);
+        System.out.println(teamCombinations);
 
         for(List<Integer> teamCombination: teamCombinations) {
 

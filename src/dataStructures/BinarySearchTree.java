@@ -47,10 +47,10 @@ public class BinarySearchTree
         System.out.println("Predecessor: " + predecessor(tree.root, node).value);
 
         node.value = 1;
-        System.out.println("Node: " + treeSearch(tree.root, node));
+        System.out.println("TrieNode: " + treeSearch(tree.root, node));
 
         node.value = 18;
-        System.out.println("Node: " + iterativeTreeSearch(tree.root, node));
+        System.out.println("TrieNode: " + iterativeTreeSearch(tree.root, node));
 
         Node node1 = new Node();
         node.value = 8;
