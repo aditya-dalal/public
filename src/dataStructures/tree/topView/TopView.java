@@ -1,7 +1,6 @@
 package dataStructures.tree.topView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by aditya.dalal on 18/09/17.
@@ -25,9 +24,15 @@ public class TopView {
         topView1(a);
         System.out.println();
         topView(a);
+        System.out.println();
+        topView2(a);
+        System.out.println();
+        rightView(a);
+        System.out.println();
+        leftView(a);
     }
 
-    static void topView(Node root) {
+    static void topView(Node root) { // doesn't cover all use cases
         if(root == null)
             return;
         List<Integer> view = new ArrayList<>();
@@ -71,6 +76,66 @@ public class TopView {
             System.out.print(i.val.data + " ");
     }
 
+    static void topView2(Node root) {
+        if(root == null)
+            return;
+        Map<Integer, Node> map = new TreeMap<>();
+        Queue<NodeLevel> queue = new LinkedList<>();
+        queue.add(new NodeLevel(root, 0));
+        while (!queue.isEmpty()) {
+            NodeLevel n = queue.poll();
+            if(n.node.left != null)
+                queue.add(new NodeLevel(n.node.left, n.level-1));
+            if(n.node.right != null)
+                queue.add(new NodeLevel(n.node.right, n.level+1));
+            if(map.get(n.level) == null)
+                map.put(n.level, n.node);
+        }
+        for(Map.Entry<Integer, Node> entry : map.entrySet())
+            System.out.print(entry.getValue().data + " ");
+        System.out.println();
+    }
+
+    static void rightView(Node root) {
+        if(root == null)
+            return;
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node node = queue.poll();
+                if(node.right != null)
+                    queue.add(node.right);
+                if(node.left != null)
+                    queue.add(node.left);
+                if(i == 0)
+                    System.out.print(node.data + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    static void leftView(Node root) {
+        if(root == null)
+            return;
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node node = queue.poll();
+                if(node.left != null)
+                    queue.add(node.left);
+                if(node.right != null)
+                    queue.add(node.right);
+                if(i == 0)
+                    System.out.print(node.data + " ");
+            }
+        }
+        System.out.println();
+    }
+
 }
 
 class TempNode {
@@ -91,5 +156,14 @@ class Node {
 
     public Node(int val) {
         this.data = val;
+    }
+}
+
+class NodeLevel {
+    Node node;
+    int level;
+    public NodeLevel(Node node, int level) {
+        this.node = node;
+        this.level = level;
     }
 }

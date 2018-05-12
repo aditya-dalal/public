@@ -1,6 +1,5 @@
 package dataStructures.MyHashMap;
 
-import java.util.List;
 
 /**
  * Created by aditya.dalal on 15/11/17.

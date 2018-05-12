@@ -74,7 +74,20 @@ public class Trie {
         return false;
     }
 
-    public static void delete(Node root, String word, int charIndex) {
+    public static void delete(Node node, String word, int index) {
+        char c = word.charAt(index);
+        Node temp = node.childern.get(c);
+        if(temp == null)
+            return;
+        if(index == word.length()-1)
+            temp.isEndOfWord = false;
+        else
+            delete(temp, word, index+1);
+        if(temp.childern.size() == 0 && !temp.isEndOfWord)
+            node.childern.remove(c);
+    }
+
+    public static void delete1(Node root, String word, int charIndex) {
         if(charIndex < word.length()) {
             char c = word.charAt(charIndex);
             Node child = root.childern.get(c);
